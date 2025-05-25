@@ -9,14 +9,14 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemtryapi.aspire-dashboard:18889
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
     ports:
-      - "5000:8080" 
+      - "5050:8080" 
 
   opentelemtryapi.aspire-dashboard:
     image: mcr.microsoft.com/dotnet/aspire-dashboard:9.0
     environment:
       DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: true
     ports:
-      - 18888:18888
+      - 20000:18888
 
   opentelemtryapi.postgres:
     image: postgres:17.2
