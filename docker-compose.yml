@@ -21,7 +21,7 @@ services:
   opentelemtryapi.postgres:
     image: postgres:17.2
     environment:
-      POSTGRES_DB: opentelemtryapidev
+      POSTGRES_DB: opentelemtryapi
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
