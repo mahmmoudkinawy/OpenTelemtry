@@ -8,7 +8,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemtryapi.aspire-dashboard:18889
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - ConnectionStrings__DefaultConnection=Host=opentelemtryapi.postgres;Database=opentelemtryapidevelopment;Username=postgres;Password=postgres
+      - ConnectionStrings__DefaultConnection=Host=opentelemetryapi-postgres;Database=opentelemtryapi;Username=postgres;Password=postgres
     ports:
       - "5050:8080" 
 
@@ -19,11 +19,13 @@ services:
     ports:
       - 20000:18888
 
-  opentelemtryapi.postgres:
+  opentelemetryapi-postgres:
     image: postgres:17.2
     environment:
       POSTGRES_DB: opentelemtryapi
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
     volumes:
       - ./.container/postgres-data:/var/lib/postgresql/data
