@@ -1,0 +1,6 @@
+@OpenTelemtryApi_HostAddress = http://localhost:5222
+
+GET {{OpenTelemtryApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

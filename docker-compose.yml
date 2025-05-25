@@ -1,0 +1,30 @@
+services:
+  opentelemtryapi:
+    image: ${DOCKER_REGISTRY-}opentelemtryapi
+    build:
+      context: .
+      dockerfile: OpenTelemtryApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemtryapi.aspire-dashboard:18889
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+    ports:
+      - "5000:8080" 
+
+  opentelemtryapi.aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: true
+    ports:
+      - 18888:18888
+
+  opentelemtryapi.postgres:
+    image: postgres:17.2
+    environment:
+      POSTGRES_DB: opentelemtryapidev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - ./.container/postgres-data:/var/lib/postgresql/data
